@@ -1,5 +1,5 @@
 package com.castillo.test.ui.core
 
-class Constants {
+object Constants {
     public val TEXT_VARIABLE = "usuario"
 }

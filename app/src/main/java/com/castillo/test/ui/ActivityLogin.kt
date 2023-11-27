@@ -36,17 +36,11 @@ class ActivityLogin : AppCompatActivity() {
             //Toast.makeText(this, u, Toast.LENGTH_SHORT).show()
             if(!conect){
                 Snackbar.make(binding.btnLogin, "Incorrecto", Snackbar.LENGTH_LONG).show()
+                binding.etUser.text.clear()
+                binding.etPassword.text.clear()
             }else{
-                Snackbar.make(binding.btnLogin, "Usuario Correcto", Snackbar.LENGTH_LONG).show()
-                val intent_impl = Intent().apply {
-                action = Intent.ACTION_SEND //forma de enviar valores a travez del intent ↓
-                putExtra(Intent.EXTRA_TEXT, "Este es el valor que comparto" )
-                    type = "text/plain"
-                }
-                startActivity(intent_impl)
-
                 val intent_exp = Intent(this, MainActivity::class.java)
-                intent_exp.putExtra(Intent.EXTRA_TEXT, "usuario")
+                intent_exp.putExtra(Constants.TEXT_VARIABLE, u)
                 startActivity(intent_exp)
             }
         }
