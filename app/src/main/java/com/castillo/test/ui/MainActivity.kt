@@ -7,28 +7,35 @@ import com.castillo.test.R
 import com.creative.ipfyandroid.Ipfy
 import com.creative.ipfyandroid.IpfyClass
 import com.castillo.test.databinding.ActivityMainBinding
+import com.castillo.test.logic.login.LoginUserCase
+import com.castillo.test.ui.core.Constants
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private val loginUserCase: LoginUserCase = LoginUserCase()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        intent.extras.let{
+            val usrId = it?.getInt(Constants.USR_ID)
+            if (usrId != null){
+                getAndShowName(loginUserCase.getUserName(usrId).firstName)
+            }else{
+                returnLogin()
+            }
+        }
 
-        Ipfy.init(this) // this is a context of application
-        //or you can also pass IpfyClass type to get either IPv4 address only or universal address IPv4/v6 as
-        Ipfy.init(this, IpfyClass.IPv4) //to get only IPv4 address
-        //and
-        Ipfy.init(this,IpfyClass.UniversalIP) //to get Universal address in IPv4/v6
-
+        Ipfy.init(this)
+        Ipfy.init(this, IpfyClass.IPv4)
+        Ipfy.init(this,IpfyClass.UniversalIP)
         getIpAddress()
     }
 
     override fun onStart() {
         super.onStart()
         returnLogin()
-        getAndShowName()
+
     }
 
     fun returnLogin(){
@@ -41,15 +48,13 @@ class MainActivity : AppCompatActivity() {
 
     fun getIpAddress(){
         Ipfy.getInstance().getPublicIpObserver().observe(this, { ipData ->
-
-            binding.txt_ip.text=
-                ipData.currentIpAddress // this is a value which is your current public IP address, null if no/lost internet connection
+            binding.txtIp.text=
+                ipData.currentIpAddress
         })
     }
 
-    fun getAndShowName(){
-        val intent = getIntent()
-        binding.txt_msj.text =getString(R.string.txtBnv, intent.getStringExtra("user"))
+    fun getAndShowName(usr:String){
+        binding.txtMsj.text =getString(R.string.txtBnv,usr)
     }
 
 

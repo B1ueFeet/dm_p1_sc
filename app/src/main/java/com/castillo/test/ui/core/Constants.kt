@@ -1,5 +1,6 @@
 package com.castillo.test.ui.core
 
 object Constants {
-    public val TEXT_VARIABLE = "usuario"
+    const val USR_ID = "ip_user"
+    const val TAG = "UCE"
 }

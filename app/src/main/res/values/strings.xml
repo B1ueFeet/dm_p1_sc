@@ -5,4 +5,5 @@
     <string name="log_in">Welcome Again</string>
     <string name="not_a_member">Not a Member</string>
     <string name="login">Login</string>
+    <string name="txtBnv">Bienvenido de nuevo\n%s\nEsta es tu ip:\n</string>
 </resources>

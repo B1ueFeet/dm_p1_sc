@@ -6,13 +6,13 @@ import android.os.Bundle
 
 import com.castillo.test.R
 import com.castillo.test.databinding.ActivityLogginBinding
-import com.castillo.test.logic.login.SingIn
+import com.castillo.test.logic.login.LoginUserCase
 import com.castillo.test.ui.core.Constants
 import com.google.android.material.snackbar.Snackbar
 
 class ActivityLogin : AppCompatActivity() {
     private lateinit var binding:ActivityLogginBinding
-    private val singIn: SingIn = SingIn()
+    private val loginUserCase: LoginUserCase = LoginUserCase()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,22 +32,20 @@ class ActivityLogin : AppCompatActivity() {
         binding.btnLogin.setOnClickListener{
             var u = binding.etUser.text.toString()
             var p = binding.etPassword.text.toString()
-            var conect = singIn.checkUserPassword(u,p)
+            var conect = loginUserCase.checkUserPassword(u,p)
             //Toast.makeText(this, u, Toast.LENGTH_SHORT).show()
             if(!conect){
                 Snackbar.make(binding.btnLogin, "Incorrecto", Snackbar.LENGTH_LONG).show()
                 binding.etUser.text.clear()
                 binding.etPassword.text.clear()
             }else{
-                val intent_exp = Intent(this, MainActivity::class.java)
-                intent_exp.putExtra(Constants.TEXT_VARIABLE, u)
-                startActivity(intent_exp)
+                val intent = Intent(this, MainActivity::class.java)
+                val uid = loginUserCase.checkId(u)
+                intent.putExtra(Constants.USR_ID,uid)
+                startActivity(intent)
             }
         }
     }
-
-
-
     override fun onDestroy() {
         super.onDestroy()
     }
