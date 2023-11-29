@@ -1,9 +1,14 @@
-package com.castillo.test.data.entities
+package com.castillo.test.data.entities.entities
 
-data class Users(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class User(
     val userName: String? ="",
     val password: String? ="")
 {
+    @PrimaryKey(autoGenerate = true)
     var id: Int =-1
     var firstName:String = "No Registrado"
     var lastName:String = "No Registrado"

@@ -1,7 +1,7 @@
 package com.castillo.test.logic.login
 
 import android.util.Log
-import com.castillo.test.data.entities.Users
+import com.castillo.test.data.entities.entities.User
 import com.castillo.test.data.entities.repository.DBUsers
 import com.castillo.test.ui.core.Constants
 
@@ -27,5 +27,5 @@ class LoginUserCase {
         Log.d(Constants.TAG, ret.toString())
         return ret
     }
-    fun getUserName(id:Int):Users = DBUsers().getListUsers().first {it.id == id}
+    fun getUserName(id:Int): User = DBUsers().getListUsers().first {it.id == id}
 }

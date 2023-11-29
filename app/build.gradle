@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    //IMPLEMENTACION DE KSP
+    id 'com.google.devtools.ksp'
 
 }
 
@@ -50,5 +52,12 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //nCOSAS NUEVAS
     implementation 'com.github.chintan369:Ipify-Android:1.0.1'
+    //DEPENDENCIAS DE ROOM
+    implementation 'androidx.room:room-runtime:2.5.0'
+    annotationProcessor 'androidx.room:room-compiler:2.5.0'
+    // VAMOS A USAR KSP ASI QUE SE AGREGA
+    ksp 'androidx.room:room-compiler:2.5.0'
+
 }
