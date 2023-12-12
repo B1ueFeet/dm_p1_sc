@@ -12,7 +12,7 @@ import com.castillo.test.ui.core.Constants
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val loginUserCase: LoginUserCase = LoginUserCase()
+    //private val loginUserCase: LoginUserCase = LoginUserCase()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         intent.extras.let{
             val usrId = it?.getInt(Constants.USR_ID)
             if (usrId != null){
-                getAndShowName(loginUserCase.getUserName(usrId).firstName)
+                //getAndShowName(loginUserCase.getUserName(usrId).firstName)
             }else{
                 returnLogin()
             }
