@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.PrincipalAtivity">
     <TextView
-        android:id="@+id/txtUsrId"
+        android:id="@+id/txt_usr_name"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="center"
@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"
         tools:text="Bienvenido" />
 
     <FrameLayout
@@ -25,7 +26,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsrId" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_usr_name" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -2,9 +2,15 @@ package com.castillo.test.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.castillo.test.R
 import com.castillo.test.databinding.ActivityPrincipalBinding
+import com.castillo.test.logic.login.LoginUserCase
+import com.castillo.test.ui.core.Constants
+import com.castillo.test.ui.core.My_Application
 import com.castillo.test.ui.fragment.FavoritesFragment
 import com.castillo.test.ui.fragment.ListFragment
 import kotlinx.coroutines.Dispatchers
@@ -20,53 +26,63 @@ class PrincipalAtivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initListeners()
+        chckDataBase()
+    }
 
-        val listFragment = ListFragment()
-        val favoritesFragment = FavoritesFragment()
-
+    fun initListeners(){
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            val transaction = supportFragmentManager.beginTransaction()
             when (item.itemId) {
                 R.id.it_home -> {
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(binding.frmContainer.id, listFragment)
+                    transaction.replace(binding.frmContainer.id, ListFragment())
                     transaction.commit()
                     true
                 }
 
                 R.id.it_fav -> {
-                    val transaction = supportFragmentManager.beginTransaction()
-                    transaction.replace(binding.frmContainer.id, favoritesFragment)
+                    transaction.replace(binding.frmContainer.id, FavoritesFragment())
                     transaction.commit()
                     true
                 }
 
                 else -> {
                     lifecycleScope.launch(Dispatchers.Main) {
-
-                        val s1 = async {
-                            val a = ""
-                        }
-                        val listC = listOf(
-                            async { getName() },
-                            async { getName() },
-                        )
-                        val w = awaitAll(listC)
                         val name = withContext(Dispatchers.IO) {
                             getName()
                         }
+                        binding.txtUsrName.text = name
                         binding.bottomNavigation
+
 
                     }
                     false
                 }
             }
         }
+    }
+
+    fun chckDataBase (){
+        lifecycleScope.launch (Dispatchers.Main) {
+            val usrs = withContext(Dispatchers.IO){
+                LoginUserCase(My_Application.getConnectionDB()!!).getAllUsers()
+            }
+            Log.d(Constants.TAG, usrs.toString())
+        }
+
+        /*lifecycleScope.launch(Dispatchers.IO) {
+            val usrs = LoginUserCase(My_Application.getConnectionDB()!!).getAllUsers()
+            withContext(Dispatchers.Main){
+                usrs
+            }
+        }*/
+
 
     }
     suspend fun getName():String{
-        val a ="Henry"
+        val a ="Serghy "
 
-        val b = a +"Coyago"
+        val b = a +"Castillo"
 
         return a//esto es lo que se va a devolver
     }

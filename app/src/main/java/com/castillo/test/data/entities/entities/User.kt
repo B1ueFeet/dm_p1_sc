@@ -4,34 +4,43 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class User(
-    val userName: String? ="",
-    val password: String? ="")
-{
-    @PrimaryKey(autoGenerate = true)
-    var id: Int =-1
-    var firstName:String = "No Registrado"
-    var lastName:String = "No Registrado"
-    var profile:String = "User"
-    constructor(id: Int, userName: String?,
-                password: String?,profile : String
-    ) :  this(userName,password)
-    constructor(id: Int, userName: String?,
-        password: String?): this(userName, password){
-            this.id = id
-        }
+data class User(    // Constructor primario (CP)
+    val userName: String? = null,
+    val password: String? = null,
+) {
 
-    constructor(id: Int,
-                userName: String?,
-                password: String?,
-                firstName : String,
-                lastName: String):this(
-                    userName,
-                    password,
-                ){
-                    this.id = id
-                    this.firstName = firstName;
-                    this.lastName = lastName
-                }
+    @PrimaryKey(autoGenerate = true)
+    var userId: Int = -1
+
+    var firstName: String? = "Usuario No registrado"
+    var lastName: String? = "Usuario No registrado"
+    var profile: String? = ""
+
+    /* CONSTRUCTORES Sobrecargados:
+     En el paréntesis del this() van los elementos que tiene el constructor primario, y en llaves
+     los elementos que tiene el constructor como parámetro y que no están en el C. Primario. */
+    constructor(userName: String?, password: String?, userId: Int) : this(
+        userName,
+        password
+    ) {
+        this.userId = userId
+    }
+
+    constructor(userName: String?, password: String?, profile: String) : this(
+        userName,
+        password
+    ) {
+        this.profile = profile
+    }
+
+    constructor(userName: String?, password: String?, userId: Int, firstName: String, lastName: String) : this(
+        userName,
+        password
+    ) {
+        this.userId = userId
+        this.firstName = firstName
+        this.lastName = lastName
+    }
+
 }
 

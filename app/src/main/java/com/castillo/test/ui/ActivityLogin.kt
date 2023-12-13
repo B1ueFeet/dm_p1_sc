@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class ActivityLogin : AppCompatActivity() {
     private lateinit var binding:ActivityLogginBinding
-    private val loginUserCase: LoginUserCase = LoginUserCase()
+    //private val loginUserCase: LoginUserCase = LoginUserCase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,9 @@ class ActivityLogin : AppCompatActivity() {
         binding.btnLogin.setOnClickListener{
             var u = binding.etUser.text.toString()
             var p = binding.etPassword.text.toString()
-            var conect = loginUserCase.checkUserPassword(u,p)
+            val intent = Intent(this, PrincipalAtivity::class.java)
+            startActivity(intent)
+            /*var conect = loginUserCase.checkUserPassword(u,p)
             //Toast.makeText(this, u, Toast.LENGTH_SHORT).show()
             if(!conect){
                 Snackbar.make(binding.btnLogin, "Incorrecto", Snackbar.LENGTH_LONG).show()
@@ -43,7 +45,7 @@ class ActivityLogin : AppCompatActivity() {
                 val uid = loginUserCase.checkId(u)
                 intent.putExtra(Constants.USR_ID,uid)
                 startActivity(intent)
-            }
+            }*/
         }
     }
     override fun onDestroy() {

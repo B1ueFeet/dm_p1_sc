@@ -8,7 +8,7 @@ import com.castillo.test.ui.core.Constants
 
 class LoginUserCase (val connection: DataBaseRepo) {
     fun checkUserPassword(user: String, password: String): Boolean {
-        val users= DBUsers().getListUsers()
+        val users= DBUsers().getUserList()
         val lstusers = users.filter {
             it.password.equals(password) && it.userName.equals(user)
         }
@@ -18,24 +18,25 @@ class LoginUserCase (val connection: DataBaseRepo) {
 
     fun checkId (user: String): Int {
         var ret = -1
-        val users= DBUsers().getListUsers()
+        val users= DBUsers().getUserList()
         val auxUser = users.filter {
             it.userName.equals(user)
         }
         if (auxUser.isNotEmpty()){
-            ret = auxUser.first().id
+            ret = auxUser.first().userId
         }
         Log.d(Constants.TAG, ret.toString())
         return ret
     }
-    fun getUserName(id:Int): User = DBUsers().getListUsers().first {it.id == id}
+    fun getUserName(id:Int): User = DBUsers().getUserList().first {it.userId == id}
 
-    fun insertUser()=
-        if(connection.getUserDAO().getAllUsers().isNotEmpty()){
-            connection.getUserDAO().insertUsers(
-                DBUsers().getListUsers()
+    suspend fun insertUser()=
+        if(connection.getUserDAO().getAllUsers().isEmpty()){
+            connection.getUserDAO().insertUser(
+                DBUsers().getUserList()
             )
         }else{
 
         }
+    suspend fun getAllUsers() : List<User> = connection.getUserDAO().getAllUsers()
 }
