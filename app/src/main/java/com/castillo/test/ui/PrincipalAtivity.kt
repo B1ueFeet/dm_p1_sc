@@ -6,7 +6,9 @@ import android.os.Debug
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.castillo.test.R
+import com.castillo.test.data.entities.entities.User
 import com.castillo.test.databinding.ActivityPrincipalBinding
 import com.castillo.test.logic.login.LoginUserCase
 import com.castillo.test.ui.core.Constants
@@ -28,9 +30,23 @@ class PrincipalAtivity : AppCompatActivity() {
         setContentView(binding.root)
         initListeners()
         chckDataBase()
+        initRecyclerView()
     }
 
-    fun initListeners(){
+    private fun initRecyclerView() {
+        lifecycleScope.launch {
+            val usrs = withContext(Dispatchers.IO){ getUserList()}
+            val adapter: UserAdapter = UserAdapter(usrs)
+            binding.rvUser.adapter = adapter
+            binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )
+        }
+    }
+
+    private suspend fun getUserList() : List<User>{
+        return LoginUserCase(My_Application.getConnectionDB()!!).getAllUsers()
+    }
+
+    fun initListeners() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             val transaction = supportFragmentManager.beginTransaction()
             when (item.itemId) {
@@ -62,7 +78,7 @@ class PrincipalAtivity : AppCompatActivity() {
         }
     }
 
-    fun chckDataBase (){
+    fun chckDataBase () {
         lifecycleScope.launch (Dispatchers.Main) {
             val usrs = withContext(Dispatchers.IO){
                 LoginUserCase(My_Application.getConnectionDB()!!).getAllUsers()
