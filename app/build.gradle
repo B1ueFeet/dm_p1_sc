@@ -68,8 +68,10 @@ dependencies {
     // CORRUTINAS
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    // IMAGEN IMP
+    implementation 'io.coil-kt:coil:2.5.0'
+    //LOTTIE
+    implementation "com.airbnb.android:lottie:3.4.0"
 
-    // RECICLERVIEW
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
 }

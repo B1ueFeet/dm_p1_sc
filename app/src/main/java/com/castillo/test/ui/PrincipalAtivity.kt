@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Debug
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.castillo.test.ui.fragment.ListFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -34,15 +36,18 @@ class PrincipalAtivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
+            binding.pbPrincipal.visibility= View.VISIBLE
             val usrs = withContext(Dispatchers.IO){ getUserList()}
             val adapter: UserAdapter = UserAdapter(usrs)
             binding.rvUser.adapter = adapter
             binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )
+            binding.pbPrincipal.visibility= View.GONE
         }
     }
 
     private suspend fun getUserList() : List<User>{
+        delay(7000)
         return LoginUserCase(My_Application.getConnectionDB()!!).getAllUsers()
     }
 
