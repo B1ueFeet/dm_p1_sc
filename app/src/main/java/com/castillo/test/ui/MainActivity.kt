@@ -7,7 +7,6 @@ import com.castillo.test.R
 import com.creative.ipfyandroid.Ipfy
 import com.creative.ipfyandroid.IpfyClass
 import com.castillo.test.databinding.ActivityMainBinding
-import com.castillo.test.logic.login.LoginUserCase
 import com.castillo.test.ui.core.Constants
 
 class MainActivity : AppCompatActivity() {

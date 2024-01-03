@@ -1,9 +1,9 @@
-package com.castillo.test.logic.login
+package com.castillo.test.logic.usercase.local
 
 import android.util.Log
-import com.castillo.test.data.entities.entities.User
-import com.castillo.test.data.entities.repository.DBUsers
-import com.castillo.test.data.entities.repository.DataBaseRepo
+import com.castillo.test.data.entities.local.entities.User
+import com.castillo.test.data.entities.local.repository.DBUsers
+import com.castillo.test.data.entities.local.repository.DataBaseRepo
 import com.castillo.test.ui.core.Constants
 
 class LoginUserCase (val connection: DataBaseRepo) {

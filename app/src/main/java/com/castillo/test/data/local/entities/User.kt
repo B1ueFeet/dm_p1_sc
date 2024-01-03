@@ -1,4 +1,4 @@
-package com.castillo.test.data.entities.entities
+package com.castillo.test.data.entities.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

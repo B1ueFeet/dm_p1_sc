@@ -2,23 +2,19 @@ package com.castillo.test.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.castillo.test.R
-import com.castillo.test.data.entities.entities.User
+import com.castillo.test.data.entities.local.entities.User
 import com.castillo.test.databinding.ActivityPrincipalBinding
-import com.castillo.test.logic.login.LoginUserCase
+import com.castillo.test.logic.usercase.local.LoginUserCase
 import com.castillo.test.ui.core.Constants
 import com.castillo.test.ui.core.My_Application
 import com.castillo.test.ui.fragment.FavoritesFragment
 import com.castillo.test.ui.fragment.ListFragment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

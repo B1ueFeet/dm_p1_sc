@@ -6,9 +6,6 @@ import android.os.Bundle
 
 import com.castillo.test.R
 import com.castillo.test.databinding.ActivityLogginBinding
-import com.castillo.test.logic.login.LoginUserCase
-import com.castillo.test.ui.core.Constants
-import com.google.android.material.snackbar.Snackbar
 
 class ActivityLogin : AppCompatActivity() {
     private lateinit var binding:ActivityLogginBinding

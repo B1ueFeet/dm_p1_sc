@@ -1,6 +1,6 @@
-package com.castillo.test.data.entities.repository
+package com.castillo.test.data.entities.local.repository
 
-import com.castillo.test.data.entities.entities.User
+import com.castillo.test.data.entities.local.entities.User
 
 class DBUsers {
     fun getUserList(): List<User> {

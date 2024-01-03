@@ -1,11 +1,11 @@
-package com.castillo.test.data.entities.repository
+package com.castillo.test.data.entities.local.repository
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.castillo.test.data.entities.dao.UserDAO
-import com.castillo.test.data.entities.entities.User
+import com.castillo.test.data.entities.local.dao.UserDAO
+import com.castillo.test.data.entities.local.entities.User
 
 @Database(
     entities = [User::class],

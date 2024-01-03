@@ -1,10 +1,10 @@
-package com.castillo.test.data.entities.dao
+package com.castillo.test.data.entities.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.castillo.test.data.entities.entities.User
+import com.castillo.test.data.entities.local.entities.User
 
 @Dao
 interface UserDAO {
