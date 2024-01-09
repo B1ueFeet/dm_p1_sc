@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.castillo.test.R
 import com.castillo.test.data.entities.local.entities.User
 import com.castillo.test.databinding.ActivityPrincipalBinding
+import com.castillo.test.logic.usercase.jikan.JikanGetTopAnimesUserCase
 import com.castillo.test.logic.usercase.local.LoginUserCase
 import com.castillo.test.ui.core.Constants
 import com.castillo.test.ui.core.My_Application
@@ -29,12 +30,17 @@ class PrincipalAtivity : AppCompatActivity() {
         initListeners()
         chckDataBase()
         initRecyclerView()
+        getAllTopAnimes()
     }
+    private fun getAllTopAnimes(){
+        lifecycleScope.launch(Dispatchers.IO) {
 
+        }
+    }
     private fun initRecyclerView() {
         lifecycleScope.launch(Dispatchers.Main) {
             binding.pbPrincipal.visibility= View.VISIBLE
-            val usrs = withContext(Dispatchers.IO){ getUserList()}
+            val usrs = withContext(Dispatchers.IO){ JikanGetTopAnimesUserCase().getResponse().data}
             val adapter: UserAdapter = UserAdapter(usrs)
             binding.rvUser.adapter = adapter
             binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )

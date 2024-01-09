@@ -8,16 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.castillo.test.R
 import com.castillo.test.data.entities.local.entities.User
+import com.castillo.test.data.network.entities.jikan.top.Data
 import com.castillo.test.databinding.UserItemsBinding
 
 
-class UserAdapter (val listUsers : List<User>) : RecyclerView.Adapter<UserAdapter.UserVH> (){
+class UserAdapter (val listUsers : List<Data>) : RecyclerView.Adapter<UserAdapter.UserVH> (){
     class UserVH (view: View) : RecyclerView.ViewHolder (view) {
         private var binding : UserItemsBinding = UserItemsBinding.bind(view)
-        fun render (item: User){
-            binding.textID.text = item.userId.toString()
-            binding.textName.text = item.firstName.toString() + " " + item.lastName.toString()
-            binding.imgUser.load("https://cdn-icons-png.flaticon.com/512/1177/1177568.png"){
+        fun render (item: Data){
+            binding.textID.text = item.mal_id.toString()
+            binding.textName.text = item.title_english
+            binding.imgUser.load(item.images.jpg.small_image_url){
                 crossfade(true)
                 placeholder(R.drawable.user)
             }
