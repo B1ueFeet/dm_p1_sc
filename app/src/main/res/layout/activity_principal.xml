@@ -38,6 +38,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_menu_bar"/>
 
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swiperfesh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/frm_container">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user"
         android:layout_width="391dp"
@@ -46,6 +54,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frm_container" />
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/pb_principal"

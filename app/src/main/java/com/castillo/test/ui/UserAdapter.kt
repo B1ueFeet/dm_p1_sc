@@ -16,8 +16,8 @@ class UserAdapter (val listUsers : List<Data>) : RecyclerView.Adapter<UserAdapte
     class UserVH (view: View) : RecyclerView.ViewHolder (view) {
         private var binding : UserItemsBinding = UserItemsBinding.bind(view)
         fun render (item: Data){
-            binding.textID.text = item.mal_id.toString()
-            binding.textName.text = item.title_english
+            binding.textID.text = item.title_english
+            binding.textName.text = item.synopsis
             binding.imgUser.load(item.images.jpg.small_image_url){
                 crossfade(true)
                 placeholder(R.drawable.user)

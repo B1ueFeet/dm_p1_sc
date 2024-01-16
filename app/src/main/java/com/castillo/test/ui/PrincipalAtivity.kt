@@ -15,6 +15,7 @@ import com.castillo.test.ui.core.Constants
 import com.castillo.test.ui.core.My_Application
 import com.castillo.test.ui.fragment.FavoritesFragment
 import com.castillo.test.ui.fragment.ListFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class PrincipalAtivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initListeners()
+        initListenerss()
         chckDataBase()
         initRecyclerView()
         getAllTopAnimes()
@@ -37,14 +38,35 @@ class PrincipalAtivity : AppCompatActivity() {
 
         }
     }
+
+
+    private fun initListenerss(){
+
+
+        binding.swiperfesh.setOnRefreshListener {
+            val adapter: UserAdapter = UserAdapter(listOf())
+            binding.rvUser.adapter = adapter
+            binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )
+
+            initRecyclerView()
+            binding.swiperfesh.isRefreshing = false
+        }
+    }
     private fun initRecyclerView() {
         lifecycleScope.launch(Dispatchers.Main) {
             binding.pbPrincipal.visibility= View.VISIBLE
-            val usrs = withContext(Dispatchers.IO){ JikanGetTopAnimesUserCase().getResponse().data}
-            val adapter: UserAdapter = UserAdapter(usrs)
-            binding.rvUser.adapter = adapter
-            binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )
+            val animes = withContext(Dispatchers.IO){ JikanGetTopAnimesUserCase().getResponse()}
+            animes.onSuccess {
+                val adapter: UserAdapter = UserAdapter(it.data)
+                binding.rvUser.adapter = adapter
+                binding.rvUser.layoutManager = LinearLayoutManager(this@PrincipalAtivity, LinearLayoutManager.VERTICAL, false )
+            }
+            animes.onFailure {
+                //ESTA PARTE DEPENDE DE LO QUE SE DESEE MOSTRAR AL USUARIO (SNACKBBAR, INTENT, DIALOGS, FINISH, ETC)
+                finish()
+            }
             binding.pbPrincipal.visibility= View.GONE
+
         }
     }
 

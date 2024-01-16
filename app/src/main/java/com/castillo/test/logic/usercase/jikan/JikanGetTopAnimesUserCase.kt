@@ -11,8 +11,11 @@ import com.castillo.test.ui.core.Constants
 
 class JikanGetTopAnimesUserCase {
 
-    suspend fun getResponse() : TopAnime {
-        val result : Result<TopAnime>
+    suspend fun getResponse() : Result<TopAnime> {
+
+
+        var result : Result<TopAnime>? = null
+
         var infoAnime = TopAnime()
         try {
             val baseService = RetroFitBase.getJikanConecction()
@@ -22,13 +25,15 @@ class JikanGetTopAnimesUserCase {
             if(call.isSuccessful){
                 val a = call.body()!!
                 infoAnime = a
-                result = Result.success(a)
+                result = Result.success(infoAnime)
             }else{
                 Log.e(Constants.TAG, "Error en el llamado del API Jikan")
+                result = Result.failure(Exception("Error en el llamado del API Jikan"))
             }
         }catch (ex:Exception){
             Log.e(Constants.TAG, ex.stackTraceToString())
+            result = Result.failure(ex)
         }
-        return infoAnime
+        return result!!
     }
 }
